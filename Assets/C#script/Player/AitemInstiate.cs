@@ -9,10 +9,11 @@ public class AitemInstiate : MonoBehaviour {
     {
 
     }
-
+    
     // Update is called once per frame
     void Update () {
-        if(Input.GetKeyDown(KeyCode.Space))
+        //Input.GetKeyDown(KeyCode.Space)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(Wall, new Vector3(transform.position.x, transform.position.y, transform.position.z + 5), new Quaternion(0,0,0,0));
         }

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonObjectName : MonoBehaviour {
-    string ButtonName;
+    string ButtonName;//オブジェクトの名前を返す変数
 
     //ButtonのID
     public enum BUTTON_ID
@@ -20,10 +20,6 @@ public class ButtonObjectName : MonoBehaviour {
         AttckButton,
         MetastasisButton
     }
-   
-    private void Start()
-    {
-    }
     /// <summary>
     /// ボタンのオブジェクト名を返す
     /// </summary>
@@ -31,10 +27,6 @@ public class ButtonObjectName : MonoBehaviour {
     /// <returns></returns>
     public string SetObjectName(BUTTON_ID ID)
     {
-        //if (ID == BUTTON_ID.SiledButton) { return "SiledButton"; }
-        //if (ID == BUTTON_ID.AttckButton) { return "AttckButton"; }
-        //if (ID == BUTTON_ID.MetastasisButton) { return "MetastasisButton"; }
-        //return null;
         switch (ID)
         {
             case BUTTON_ID.SiledButton:

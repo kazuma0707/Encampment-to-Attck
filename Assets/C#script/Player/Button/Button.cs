@@ -14,8 +14,10 @@ public  class Button : MonoBehaviour
 {
     public Button button;
 
+
     public void OnClick()
     {
+        
         //例外処理
         if(button==null)
         {

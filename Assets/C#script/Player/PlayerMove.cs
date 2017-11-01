@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour {
 
     //移動速度
     private const float SPEED = 0.1f;
-
+    State state;
     #endregion
     #region Event
     // Use this for initialization
@@ -28,17 +28,9 @@ public class PlayerMove : MonoBehaviour {
         Vector3 pos = transform.position;
         pos.x += _joystick.Position.x * SPEED;
         pos.z += _joystick.Position.y * SPEED;
-
+        
         transform.position = pos;
 
-        //if(Player.isGrounded)
-        //{
-        //    Velocity.x = Input.GetAxis("Horizontal");
-        //    Velocity.y = 0;
-        //    Velocity.z = Input.GetAxis("Vertical");
-        //}
-        //Velocity.y += Physics.gravity.y * Time.deltaTime;
-        //Player.Move(Velocity * Time.deltaTime);
 
     }
     #endregion

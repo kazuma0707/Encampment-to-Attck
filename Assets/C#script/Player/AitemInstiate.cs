@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AitemInstiate : MonoBehaviour {
-
     public GameObject Wall;
      void Start()
     {

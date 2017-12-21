@@ -3,29 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonController : Button {
-    ButtonObjectName ButtonName;
-    public GameObject Aitem;
-    Vector3 PlayerPos;//後々にどこかで管理する
+    #region variable
+
+    ButtonObjectName ButtonName;//ボタンのオブジェクト名
+    [SerializeField]
+    private GameObject Shield;//シールドのプレファブ
+    [SerializeField]
+    private GameObject Attck;//攻撃オブジェのプレファブ
+    Vector3 Playerpos;
+
+    bool puchButtonFlag = false;//ボタン押し出し許可フラグ
+    private Vector3 allowTime = new Vector3(0, 0, 600);
+   public float NowTime;
+
+    #endregion
     private void Start()
     {
         ButtonName = gameObject.AddComponent<ButtonObjectName>();
     }
+    private void Update()
+    {
+        Playerpos = Player.instance.GetPos();//Playerの座標を取得
+        if(puchButtonFlag)
+        {
+            NowTime += 1;
+            if(NowTime>allowTime.z)
+            {
+                Debug.Log("TimeOk");
+                puchButtonFlag = false;
+                NowTime = 0;
+            }
+        }
 
+    }
     protected override void OnClick(string objectName)
     {
+        if(!puchButtonFlag)
         {
-            if (ButtonName.SetObjectName(ButtonObjectName.BUTTON_ID.SiledButton).Equals(objectName))
+
+            
+
+            if (ButtonName.GetObjName(ButtonObjectName.BUTTON_ID.SiledButton).Equals(objectName))
             {
                 this.SiledButtonClick();
             }
-            else if (ButtonName.SetObjectName(ButtonObjectName.BUTTON_ID.AttckButton).Equals(objectName))
+            else if (ButtonName.GetObjName(ButtonObjectName.BUTTON_ID.AttckButton).Equals(objectName))
             {
                 this.AttckButtonClick();
             }
-            else if (ButtonName.SetObjectName(ButtonObjectName.BUTTON_ID.MetastasisButton).Equals(objectName))
+            else if (ButtonName.GetObjName(ButtonObjectName.BUTTON_ID.MetastasisButton).Equals(objectName))
             {
                 this.MetastasisButtonClick();
             }
+
+
+            puchButtonFlag = true;
         }
 
     }
@@ -33,14 +65,14 @@ public class ButtonController : Button {
     private void SiledButtonClick()
     {
         Debug.Log("SiledButton Click");
-        this.PlayerPos = GameObject.Find("Player").transform.position;//ファインドを使わないやり方にする
-
-        Instantiate(Aitem, new Vector3(PlayerPos.x, PlayerPos.y, PlayerPos.z + 5), new Quaternion(0, 0, 0, 0));
+        Instantiate(Shield, new Vector3(Playerpos.x, Playerpos.y, Playerpos.z + 5), new Quaternion(0, 0, 0, 0));
 
     }
     private void AttckButtonClick()
     {
         Debug.Log("AttckButtonClick");
+        Instantiate(Attck, new Vector3(Playerpos.x, Playerpos.y, Playerpos.z + 5), new Quaternion(0, 0, 0, 0));
+
     }
     private void MetastasisButtonClick()
     {

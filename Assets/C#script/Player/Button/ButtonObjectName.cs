@@ -25,7 +25,7 @@ public class ButtonObjectName : MonoBehaviour {
     /// </summary>
     /// <param name="ID">ButtonのID</param>
     /// <returns></returns>
-    public string SetObjectName(BUTTON_ID ID)
+    public string GetObjName(BUTTON_ID ID)
     {
         switch (ID)
         {

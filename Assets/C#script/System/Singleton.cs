@@ -2,14 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour {
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+{
+
+    static T _instance;
+
+    public static T Instance
+    {
+        get
+        {
+            if (applicationIsQuitting)
+            {
+                return null;
+            }
+
+            if (_instance == null)
+            {
+                _instance = (T)FindObjectOfType(typeof(T));
+
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject(typeof(T).ToString());
+                    _instance = go.AddComponent<T>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return _instance;
+        }
+    }
+
+    static bool applicationIsQuitting = false;
+    public void OnDestroy()
+    {
+        applicationIsQuitting = true;
+    }
 }

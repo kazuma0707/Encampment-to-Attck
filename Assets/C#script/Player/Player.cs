@@ -5,10 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     #region variable
     public static Player instance = null;
-    [SerializeField]
+    [SerializeField]//ジョイスティック
     private Joystick joystick = null;
     //playerの移動速度
     private const float MoveSpeed = 0.1f;
+    Vector3 pos;
+
     #endregion
 
     #region Event
@@ -17,16 +19,18 @@ public class Player : MonoBehaviour {
     {
         Player.instance = this;
     }
-
+    //Playerの移動処理
     public void Move()
     {
-        Vector3 pos = transform.position;
+         pos = transform.position;
         pos.x += joystick.Position.x * MoveSpeed;
         pos.z += joystick.Position.y * MoveSpeed;
 
         transform.position = pos;
-
     }
+    //Playerの座標取得
+    public Vector3 GetPos(){ return pos;  }
+
 
     // Use this for initialization
     void Start()

@@ -13,8 +13,7 @@ using UnityEngine;
 public  class Button : MonoBehaviour
 {
     public Button button;
-
-
+    
     public void OnClick()
     {
         

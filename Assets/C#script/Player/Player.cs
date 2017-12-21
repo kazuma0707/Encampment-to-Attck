@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     #region variable
-    public static Player instance = null;
+    public static Player instance = null;//Playerのインスタンス
     [SerializeField]//ジョイスティック
     private Joystick joystick = null;
-    //playerの移動速度
-    private const float MoveSpeed = 0.1f;
-    Vector3 pos;
+    private const float MoveSpeed = 0.1f;//playerの移動速度
+    Vector3 Playerpos;
+
+    public Slider HpSlider;
+    public readonly int maxHP = 100; //体力の最大値
+    public int HP;//体力
+
 
     #endregion
 
@@ -19,32 +24,38 @@ public class Player : MonoBehaviour {
     {
         Player.instance = this;
     }
-    //Playerの移動処理
-    public void Move()
-    {
-         pos = transform.position;
-        pos.x += joystick.Position.x * MoveSpeed;
-        pos.z += joystick.Position.y * MoveSpeed;
-
-        transform.position = pos;
-    }
-    //Playerの座標取得
-    public Vector3 GetPos(){ return pos;  }
-
+    
 
     // Use this for initialization
     void Start()
     {
+        HP = maxHP;
+        HpSlider.value = 100;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //移動処理
         Move();
 
+
     }
+    //Playerの移動処理
+    public void Move()
+    {
+
+        Playerpos = transform.position;
+        Playerpos.x += joystick.Position.x * MoveSpeed;
+        Playerpos.z += joystick.Position.y * MoveSpeed;
+
+        transform.position = Playerpos;
+    }
+    //Playerの座標取得
+    public Vector3 GetPos() { return Playerpos; }
 
     #endregion
 

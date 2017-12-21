@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
     public static Enemy instance = null;
 
     public Transform target;
-    float speed = 0.05f;
+    [SerializeField]
+    float speed = 0.08f;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
     void Move()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), 0.3f);
-        transform.position += new Vector3(0, 0, 0.5f);
+        transform.position += transform.forward * speed;
     }
     // Update is called once per frame
     void Update()
@@ -41,6 +42,13 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Shot")
         {
             Debug.Log("HIT");
+            speed -= 0.01f;
+
+        }
+        if(other.gameObject.tag== "Wall")
+        {
+            Debug.Log("Wall");
+            transform.position = Vector3.zero;
 
         }
     }

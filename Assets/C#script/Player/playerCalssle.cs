@@ -13,7 +13,7 @@ public class playerCalssle : MonoBehaviour {
     private float CreateTime;//生成するまでの時間
     private int CreatedPlayesNum;//生成した数
 
-    private GameObject TargetEnemy;
+
 
 
     #endregion
@@ -24,7 +24,6 @@ public class playerCalssle : MonoBehaviour {
         currentTime = 0.0f;
         CreateTime = 5.0f;
         miniplayers = new GameObject[MaxNum];
-        TargetEnemy = Enemy.instance.gameObject;
 
     }
 
@@ -38,8 +37,7 @@ public class playerCalssle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //エネミーの座標
-        Vector3 position = Enemy.instance.transform.position - transform.position;
+
         
         //MiniPlayerの生成
         if (CreatedPlayesNum<MaxNum)
